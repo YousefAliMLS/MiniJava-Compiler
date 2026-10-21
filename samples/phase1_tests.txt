@@ -1,0 +1,115 @@
+================================================================================
+Mini Java Compiler - Phase 1 Test Suite
+Course: CSCI415 - Compiler Design (Fall 2026)
+Deliverable: Official Phase 1 Test Programs
+================================================================================
+
+// -----------------------------------------------------------------------------
+// Test Case 1: Standard Valid Mini Java Program (PDF Page 4 Example)
+// Covers: class, public, static, void, main, String, System.out.println,
+//         identifiers, integers, operators, and delimiters.
+// -----------------------------------------------------------------------------
+class Factorial {
+    public static void main(String[] a) {
+        System.out.println(new Fac().ComputeFac(10));
+    }
+}
+
+class Fac {
+    public int ComputeFac(int num) {
+        int num_aux;
+        if (num < 1)
+            num_aux = 1;
+        else
+            num_aux = num * (this.ComputeFac(num - 1));
+        return num_aux;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Test Case 2: Arithmetic, Logical, and Relational Operators
+// Covers: +, -, *, /, %, ==, !=, <, <=, >, >=, &&, ||, !, =, floats, booleans
+// -----------------------------------------------------------------------------
+class ExpressionsTest {
+    public static void main(String[] args) {
+        int a;
+        float b;
+        boolean flag;
+
+        a = 10 + 5 * 2 - 8 / 4 % 3;
+        b = 3.14159 * 2.0;
+        flag = (a >= 10) && (b != 0.0) || !(a < 5);
+
+        if (flag == true) {
+            System.out.println(a);
+        } else {
+            System.out.println(0);
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Test Case 3: Comments Handling
+// Covers: Single-line comments, multi-line block comments, and inline comments.
+// -----------------------------------------------------------------------------
+class CommentsDemo {
+    // This is a single-line comment at the top of a class
+    public static void main(String[] args) {
+        /* This is a multi-line comment
+           spanning across multiple lines
+           verifying that line counts remain accurate */
+        int score; /* inline comment */ score = 95;
+        // Comment at the very end of code
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Test Case 4: Lexical Error 1 - Invalid Characters
+// Covers: Illegal characters not recognized in Mini Java (@, #, $)
+// Expected Errors: LEX_INVALID_CHARACTER at lines with illegal symbols.
+// -----------------------------------------------------------------------------
+class InvalidCharTest {
+    public static void main(String[] args) {
+        int @score = 100;
+        int count# = 5;
+        int $value = 20;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Test Case 5: Lexical Error 2 - Invalid Identifiers (Digit Prefixed)
+// Covers: Identifiers incorrectly starting with a digit (e.g. 1name, 99total)
+// Expected Errors: LEX_INVALID_IDENTIFIER at lines with invalid identifiers.
+// -----------------------------------------------------------------------------
+class InvalidIdTest {
+    public static void main(String[] args) {
+        int 1count;
+        int 99total;
+        int 2_player;
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Test Case 6: Lexical Error 3 - Unclosed String Literal
+// Covers: String literals that reach end of line without a closing quote.
+// Expected Errors: LEX_UNCLOSED_STRING at line with unclosed string.
+// -----------------------------------------------------------------------------
+class UnclosedStringTest {
+    public static void main(String[] args) {
+        String msg;
+        msg = "This string is never closed;
+        System.out.println(msg);
+    }
+}
+
+// -----------------------------------------------------------------------------
+// Test Case 7: Lexical Error 4 - Unclosed Multi-line Comment
+// Covers: Multi-line comment reaching EOF without a closing */ delimiter.
+// Expected Errors: LEX_UNCLOSED_COMMENT starting at the unclosed comment line.
+// -----------------------------------------------------------------------------
+class UnclosedCommentTest {
+    public static void main(String[] args) {
+        int x;
+        x = 42;
+        /* Start of a comment that is never terminated
+           Reached end of source file...
