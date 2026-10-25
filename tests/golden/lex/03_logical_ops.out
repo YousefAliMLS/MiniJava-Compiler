@@ -1,0 +1,46 @@
+=== Tokens ===
+Lexeme: x, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: a, Token: IDENTIFIER
+Lexeme: &&, Token: LOGOP
+Lexeme: b, Token: IDENTIFIER
+Lexeme: ||, Token: LOGOP
+Lexeme: !, Token: LOGOP
+Lexeme: c, Token: IDENTIFIER
+Lexeme: ;, Token: SEMICOLON
+Lexeme: y, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: a, Token: IDENTIFIER
+Lexeme: ==, Token: LOGOP
+Lexeme: b, Token: IDENTIFIER
+Lexeme: !=, Token: LOGOP
+Lexeme: c, Token: IDENTIFIER
+Lexeme: ;, Token: SEMICOLON
+Lexeme: z, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: a, Token: IDENTIFIER
+Lexeme: <=, Token: LOGOP
+Lexeme: b, Token: IDENTIFIER
+Lexeme: >=, Token: LOGOP
+Lexeme: c, Token: IDENTIFIER
+Lexeme: <, Token: LOGOP
+Lexeme: d, Token: IDENTIFIER
+Lexeme: >, Token: LOGOP
+Lexeme: e, Token: IDENTIFIER
+Lexeme: ;, Token: SEMICOLON
+
+=== Symbol Table ===
+Index: 1, Name: x, First seen: line 1, column 1, Occurrences: 1
+Index: 2, Name: a, First seen: line 1, column 5, Occurrences: 3
+Index: 3, Name: b, First seen: line 1, column 10, Occurrences: 3
+Index: 4, Name: c, First seen: line 1, column 16, Occurrences: 3
+Index: 5, Name: y, First seen: line 2, column 1, Occurrences: 1
+Index: 6, Name: z, First seen: line 3, column 1, Occurrences: 1
+Index: 7, Name: d, First seen: line 3, column 19, Occurrences: 1
+Index: 8, Name: e, First seen: line 3, column 23, Occurrences: 1
+
+=== Errors ===
+(none)
+
+=== Result ===
+Lexical analysis completed successfully with no errors.

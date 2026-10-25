@@ -1,0 +1,25 @@
+=== Tokens ===
+Lexeme: int, Token: INT
+Lexeme: x, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: 1, Token: NUMBER
+Lexeme: ;, Token: SEMICOLON
+Lexeme: int, Token: INT
+Lexeme: y, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: 2, Token: NUMBER
+Lexeme: ;, Token: SEMICOLON
+Lexeme: x, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: y, Token: IDENTIFIER
+Lexeme: ;, Token: SEMICOLON
+
+=== Symbol Table ===
+Index: 1, Name: x, First seen: line 2, column 5, Occurrences: 2
+Index: 2, Name: y, First seen: line 4, column 16, Occurrences: 2
+
+=== Errors ===
+(none)
+
+=== Result ===
+Lexical analysis completed successfully with no errors.

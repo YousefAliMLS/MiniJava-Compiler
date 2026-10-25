@@ -1,0 +1,39 @@
+=== Tokens ===
+Lexeme: String, Token: STRING_TYPE
+Lexeme: a, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: "Hello World", Token: STRING
+Lexeme: ;, Token: SEMICOLON
+Lexeme: char, Token: CHAR
+Lexeme: b, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: 'x', Token: STRING
+Lexeme: ;, Token: SEMICOLON
+Lexeme: String, Token: STRING_TYPE
+Lexeme: c, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: "He said \"Hi\"", Token: STRING
+Lexeme: ;, Token: SEMICOLON
+Lexeme: String, Token: STRING_TYPE
+Lexeme: d, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: "Line1\nLine2\t\\", Token: STRING
+Lexeme: ;, Token: SEMICOLON
+Lexeme: char, Token: CHAR
+Lexeme: e, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: '\'', Token: STRING
+Lexeme: ;, Token: SEMICOLON
+
+=== Symbol Table ===
+Index: 1, Name: a, First seen: line 1, column 8, Occurrences: 1
+Index: 2, Name: b, First seen: line 2, column 6, Occurrences: 1
+Index: 3, Name: c, First seen: line 3, column 8, Occurrences: 1
+Index: 4, Name: d, First seen: line 4, column 8, Occurrences: 1
+Index: 5, Name: e, First seen: line 5, column 6, Occurrences: 1
+
+=== Errors ===
+(none)
+
+=== Result ===
+Lexical analysis completed successfully with no errors.

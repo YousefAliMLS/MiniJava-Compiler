@@ -1,0 +1,4 @@
+String a = "// not a comment";
+String b = "/* nor this */";
+char c = 'abc;
+String d = "x'y";

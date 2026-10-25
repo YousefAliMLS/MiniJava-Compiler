@@ -1,0 +1,32 @@
+=== Tokens ===
+Lexeme: class, Token: CLASS
+Lexeme: Class, Token: IDENTIFIER
+Lexeme: {, Token: LCUR
+Lexeme: }, Token: RCUR
+Lexeme: Int, Token: IDENTIFIER
+Lexeme: int, Token: INT
+Lexeme: INT, Token: IDENTIFIER
+Lexeme: ;, Token: SEMICOLON
+Lexeme: True, Token: IDENTIFIER
+Lexeme: true, Token: BOOLEAN
+Lexeme: TRUE, Token: IDENTIFIER
+Lexeme: ;, Token: SEMICOLON
+Lexeme: String, Token: STRING_TYPE
+Lexeme: string, Token: IDENTIFIER
+Lexeme: STRING, Token: IDENTIFIER
+Lexeme: ;, Token: SEMICOLON
+
+=== Symbol Table ===
+Index: 1, Name: Class, First seen: line 1, column 7, Occurrences: 1
+Index: 2, Name: Int, First seen: line 2, column 1, Occurrences: 1
+Index: 3, Name: INT, First seen: line 2, column 9, Occurrences: 1
+Index: 4, Name: True, First seen: line 3, column 1, Occurrences: 1
+Index: 5, Name: TRUE, First seen: line 3, column 11, Occurrences: 1
+Index: 6, Name: string, First seen: line 4, column 8, Occurrences: 1
+Index: 7, Name: STRING, First seen: line 4, column 15, Occurrences: 1
+
+=== Errors ===
+(none)
+
+=== Result ===
+Lexical analysis completed successfully with no errors.

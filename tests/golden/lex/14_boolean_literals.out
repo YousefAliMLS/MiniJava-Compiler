@@ -1,0 +1,31 @@
+=== Tokens ===
+Lexeme: boolean, Token: BOOLEAN_TYPE
+Lexeme: a, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: true, Token: BOOLEAN
+Lexeme: ;, Token: SEMICOLON
+Lexeme: boolean, Token: BOOLEAN_TYPE
+Lexeme: b, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: false, Token: BOOLEAN
+Lexeme: ;, Token: SEMICOLON
+Lexeme: c, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: a, Token: IDENTIFIER
+Lexeme: &&, Token: LOGOP
+Lexeme: true, Token: BOOLEAN
+Lexeme: ||, Token: LOGOP
+Lexeme: !, Token: LOGOP
+Lexeme: false, Token: BOOLEAN
+Lexeme: ;, Token: SEMICOLON
+
+=== Symbol Table ===
+Index: 1, Name: a, First seen: line 1, column 9, Occurrences: 2
+Index: 2, Name: b, First seen: line 2, column 9, Occurrences: 1
+Index: 3, Name: c, First seen: line 3, column 1, Occurrences: 1
+
+=== Errors ===
+(none)
+
+=== Result ===
+Lexical analysis completed successfully with no errors.

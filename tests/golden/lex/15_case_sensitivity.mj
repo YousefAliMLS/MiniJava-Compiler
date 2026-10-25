@@ -1,0 +1,4 @@
+class Class { }
+Int int INT;
+True true TRUE;
+String string STRING;

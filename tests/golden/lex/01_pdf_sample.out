@@ -1,0 +1,54 @@
+=== Tokens ===
+Lexeme: class, Token: CLASS
+Lexeme: Student, Token: IDENTIFIER
+Lexeme: {, Token: LCUR
+Lexeme: public, Token: PUBLIC
+Lexeme: static, Token: STATIC
+Lexeme: void, Token: VOID
+Lexeme: main, Token: MAIN
+Lexeme: (, Token: LPAR
+Lexeme: ), Token: RPAR
+Lexeme: {, Token: LCUR
+Lexeme: int, Token: INT
+Lexeme: age, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: 20, Token: NUMBER
+Lexeme: ;, Token: SEMICOLON
+Lexeme: float, Token: FLOAT
+Lexeme: grade, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: 85.5, Token: NUMBER
+Lexeme: ;, Token: SEMICOLON
+Lexeme: String, Token: STRING_TYPE
+Lexeme: name, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: "Ali", Token: STRING
+Lexeme: ;, Token: SEMICOLON
+Lexeme: if, Token: IF
+Lexeme: (, Token: LPAR
+Lexeme: grade, Token: IDENTIFIER
+Lexeme: >=, Token: LOGOP
+Lexeme: 50, Token: NUMBER
+Lexeme: ), Token: RPAR
+Lexeme: {, Token: LCUR
+Lexeme: grade, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: grade, Token: IDENTIFIER
+Lexeme: +, Token: MATHOP
+Lexeme: 5, Token: NUMBER
+Lexeme: ;, Token: SEMICOLON
+Lexeme: }, Token: RCUR
+Lexeme: }, Token: RCUR
+Lexeme: }, Token: RCUR
+
+=== Symbol Table ===
+Index: 1, Name: Student, First seen: line 1, column 7, Occurrences: 1
+Index: 2, Name: age, First seen: line 3, column 13, Occurrences: 1
+Index: 3, Name: grade, First seen: line 4, column 15, Occurrences: 4
+Index: 4, Name: name, First seen: line 5, column 16, Occurrences: 1
+
+=== Errors ===
+(none)
+
+=== Result ===
+Lexical analysis completed successfully with no errors.

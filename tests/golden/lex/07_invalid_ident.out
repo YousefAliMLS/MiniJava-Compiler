@@ -1,0 +1,13 @@
+=== Tokens ===
+Lexeme: =, Token: ASSIGN
+Lexeme: 5, Token: NUMBER
+Lexeme: ;, Token: SEMICOLON
+
+=== Symbol Table ===
+(empty)
+
+=== Errors ===
+Error: invalid identifier '1name' at line 1, column 1.
+
+=== Result ===
+Lexical analysis failed with 1 error(s).

@@ -1,0 +1,6 @@
+// whole line comment
+int x = 1; // trailing comment
+/* multi
+   line */ int y = 2;
+/* a */ x = /* b */ y;
+// comment with "quote and 'apostrophe

@@ -1,0 +1,5 @@
+String a = "Hello World";
+char b = 'x';
+String c = "He said \"Hi\"";
+String d = "Line1\nLine2\t\\";
+char e = '\'';

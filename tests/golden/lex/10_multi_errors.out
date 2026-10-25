@@ -1,0 +1,30 @@
+=== Tokens ===
+Lexeme: int, Token: INT
+Lexeme: =, Token: ASSIGN
+Lexeme: 3, Token: NUMBER
+Lexeme: 4, Token: NUMBER
+Lexeme: ;, Token: SEMICOLON
+Lexeme: String, Token: STRING_TYPE
+Lexeme: s, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: x, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: 1, Token: NUMBER
+Lexeme: 2, Token: NUMBER
+Lexeme: 3, Token: NUMBER
+Lexeme: ;, Token: SEMICOLON
+
+=== Symbol Table ===
+Index: 1, Name: s, First seen: line 2, column 8, Occurrences: 1
+Index: 2, Name: x, First seen: line 3, column 1, Occurrences: 1
+
+=== Errors ===
+Error: invalid identifier '9lives' at line 1, column 5.
+Error: invalid character '#' at line 1, column 16.
+Error: unclosed string literal starting at line 2, column 12.
+Error: invalid character '&' at line 3, column 7.
+Error: invalid character '|' at line 3, column 11.
+Error: unclosed comment starting at line 4, column 1.
+
+=== Result ===
+Lexical analysis failed with 6 error(s).

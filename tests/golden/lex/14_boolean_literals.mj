@@ -1,0 +1,3 @@
+boolean a = true;
+boolean b = false;
+c = a && true || !false;

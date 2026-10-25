@@ -1,0 +1,19 @@
+=== Tokens ===
+Lexeme: String, Token: STRING_TYPE
+Lexeme: name, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: int, Token: INT
+Lexeme: x, Token: IDENTIFIER
+Lexeme: =, Token: ASSIGN
+Lexeme: 1, Token: NUMBER
+Lexeme: ;, Token: SEMICOLON
+
+=== Symbol Table ===
+Index: 1, Name: name, First seen: line 1, column 8, Occurrences: 1
+Index: 2, Name: x, First seen: line 2, column 5, Occurrences: 1
+
+=== Errors ===
+Error: unclosed string literal starting at line 1, column 15.
+
+=== Result ===
+Lexical analysis failed with 1 error(s).
