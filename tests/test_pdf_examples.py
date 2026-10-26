@@ -51,12 +51,28 @@ class PdfAcceptanceTests(unittest.TestCase):
             "Error: unclosed comment starting at line 1, column 1.",
         )
 
-    @unittest.skip(
-        "The uploaded planning files do not contain the official 13-line source and 41-token oracle. "
-        "Enable this acceptance case after copying the exact sample from ProjectGuidelinesAndDetails.pdf."
-    )
     def test_pdf_sample_program_has_exact_41_tokens(self):
-        self.fail("Insert the official PDF sample and its 41 exact token expectations here.")
+        source = """class Student {
+    public static void main() {
+        int age = 20;
+        float grade = 85.5;
+        String name = "Ali";
+        if (grade >= 50) {
+            grade = grade + 5;
+        }
+    }
+}"""
+        from minijava.tokens import TokenType
+        result = tokenize(source)
+        tokens_no_eof = [t for t in result.tokens if t.type is not TokenType.EOF]
+        self.assertEqual(len(tokens_no_eof), 41)
+        self.assertEqual(tokens_no_eof[0].type, TokenType.CLASS)
+        self.assertEqual(tokens_no_eof[1].lexeme, "Student")
+        self.assertEqual(tokens_no_eof[18].lexeme, "85.5")
+        self.assertEqual(tokens_no_eof[18].type, TokenType.NUMBER)
+        self.assertEqual(tokens_no_eof[23].lexeme, '"Ali"')
+        self.assertEqual(tokens_no_eof[23].type, TokenType.STRING)
+        self.assertEqual(len(result.diagnostics), 0)
 
 
 if __name__ == "__main__":
