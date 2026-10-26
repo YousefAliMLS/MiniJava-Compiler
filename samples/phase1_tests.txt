@@ -1,8 +1,10 @@
+/*
 ================================================================================
 Mini Java Compiler - Phase 1 Test Suite
 Course: CSCI415 - Compiler Design (Fall 2026)
 Deliverable: Official Phase 1 Test Programs
 ================================================================================
+*/
 
 // -----------------------------------------------------------------------------
 // Test Case 1: Standard Valid Mini Java Program (PDF Page 4 Example)
