@@ -1,0 +1,85 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Phase 1 Report</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.45; color: #111; max-width: 850px; margin: 30px auto; padding: 0 25px; font-size: 13.5px; }
+h1 { border-bottom: 2px solid #ccc; padding-bottom: 6px; font-size: 20px; color: #111; margin-top: 0; }
+h2 { border-bottom: 1px solid #ccc; padding-bottom: 4px; font-size: 16px; margin-top: 18px; color: #222; }
+h3 { font-size: 14px; margin-top: 12px; margin-bottom: 4px; color: #333; }
+p, li { margin: 3px 0; }
+ul { padding-left: 20px; margin: 4px 0; }
+code { background: #f0f0f0; padding: 1px 4px; border-radius: 3px; font-family: "Courier New", Courier, monospace; font-size: 12px; }
+hr { border: none; border-top: 1px solid #ddd; margin: 16px 0; }
+@page { margin: 15mm; size: A4; }
+</style></head><body>
+<h1>Mini Java Compiler - Phase 1 Technical Report: Lexical Analyzer</h1>
+<p><strong>Course:</strong> CSCI415 - Compiler Design (Fall 2026)</p>
+<p><strong>Deliverable:</strong> Phase 1 Official Submission Report (Lexical Analysis)</p>
+<p><strong>Target Language:</strong> Mini Java</p>
+<p><strong>Implementation:</strong> Python (Standard Library Only, No External Packages)</p>
+<h3>Team Members and Roles</h3>
+<ul>
+<li><strong>Member 1:</strong> Hamza Taher (ID: [ID]) - Foundations, Driver, and CLI Integration</li>
+<li><strong>Member 2:</strong> Mostafa Abd Elhamied Ismael (ID: [ID]) - Central Lexer Engine and Position Tracking</li>
+<li><strong>Member 3:</strong> Yousef Ali (ID: [ID]) - Team Leader, Symbol Table, Test Samples, and Report</li>
+<li><strong>Member 4:</strong> Yosef Yakop (ID: [ID]) - Identifier and Number Scanner, PDF Acceptance Suite</li>
+<li><strong>Member 5:</strong> Youssef Nasr (ID: [ID]) - String and Operator Scanner, Golden Test Suite</li>
+</ul>
+<hr>
+<h2>1. Tokens Implemented</h2>
+<p>The lexical analyzer scans source code character-by-character without regular expressions or third-party libraries. All token classifications match the course specifications:</p>
+<h3>1.1 Keywords (15 Total)</h3>
+<ul>
+<li>Control Flow: <code>if</code> (<code>IF</code>), <code>else</code> (<code>ELSE</code>), <code>while</code> (<code>WHILE</code>), <code>for</code> (<code>FOR</code>), <code>return</code> (<code>RETURN</code>)</li>
+<li>Primitive Types: <code>boolean</code> (<code>BOOLEAN_TYPE</code>), <code>int</code> (<code>INT_TYPE</code>), <code>float</code> (<code>FLOAT_TYPE</code>), <code>char</code> (<code>CHAR</code>), <code>String</code> (<code>STRING_TYPE</code>), <code>void</code> (<code>VOID</code>)</li>
+<li>Object-Oriented: <code>class</code> (<code>CLASS</code>), <code>public</code> (<code>PUBLIC</code>), <code>static</code> (<code>STATIC</code>), <code>main</code> (<code>MAIN</code>)</li>
+<li>Keyword matching is strictly case-sensitive (<code>class</code> is a keyword; <code>Class</code> is scanned as an identifier).</li>
+</ul>
+<h3>1.2 Literals</h3>
+<ul>
+<li><strong>Numeric Literals (<code>NUMBER</code>):</strong> Integers (<code>10</code>, <code>0</code>) and decimals (<code>85.5</code>, <code>3.14</code>). Floating-point numbers require digits on both sides of the decimal point.</li>
+<li><strong>Boolean Literals (<code>BOOLEAN</code>):</strong> <code>true</code> and <code>false</code>.</li>
+<li><strong>String Literals (<code>STRING</code>):</strong> Text enclosed in single (<code>&#x27;A&#x27;</code>) or double (<code>&quot;Ali&quot;</code>) quotes. Quotes are preserved in the token lexeme.</li>
+</ul>
+<h3>1.3 Identifiers (`IDENTIFIER`)</h3>
+<ul>
+<li>User-defined names beginning with an ASCII letter or underscore (<code>[a-zA-Z_]</code>) followed by letters, digits, or underscores (<code>[a-zA-Z0-9_]*</code>).</li>
+<li>Every valid identifier occurrence is recorded in a shared <code>IdentifierTable</code> tracking 1-based coordinates and total frequency.</li>
+</ul>
+<h3>1.4 Operators and Delimiters</h3>
+<ul>
+<li><strong>Mathematical Operators (<code>MATHOP</code>):</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code></li>
+<li><strong>Logical and Relational Operators (<code>LOGOP</code>):</strong> <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>&amp;&amp;</code>, <code>||</code>, <code>!</code></li>
+<li><strong>Assignment Operator (<code>ASSIGN</code>):</strong> <code>=</code></li>
+<li><strong>Delimiters:</strong> <code>(</code>, <code>)</code>, <code>{</code>, <code>}</code>, <code>[</code>, <code>]</code>, <code>;</code>, <code>,</code>, <code>.</code></li>
+<li><strong>Stream Termination:</strong> An explicit <code>EOF</code> token is emitted at the end of every stream.</li>
+</ul>
+<hr>
+<h2>2. How Errors Were Handled</h2>
+<p>The scanner follows a non-halting error recovery strategy: when an error is detected, an error diagnostic is recorded with exact 1-based coordinates (<code>line</code>, <code>column</code>), and scanning continues to capture all remaining defects in a single pass.</p>
+<p>Four required error categories are detected:</p>
+<p><strong>1.</strong> <strong>Invalid Characters (<code>LEX_INVALID_CHARACTER</code>):</strong> Characters not in the Mini Java alphabet (such as <code>@</code>, <code>#</code>, <code>$</code>) or lone bitwise operators (<code>&amp;</code>, <code>|</code>) are reported with their coordinates. The invalid character is skipped and scanning resumes.</p>
+<p><strong>2.</strong> <strong>Invalid Identifiers (<code>LEX_INVALID_IDENTIFIER</code>):</strong> Identifiers prefixed with digits (e.g., <code>1name</code>, <code>2_count</code>, <code>12.34abc</code>). The entire alphanumeric sequence is consumed as a single unit to prevent cascaded parsing errors, and reported without emitting an identifier token.</p>
+<p><strong>3.</strong> <strong>Unclosed String Literals (<code>LEX_UNCLOSED_STRING</code>):</strong> Quoted literals that reach an unescaped newline or end-of-file without a closing quote. The error coordinate points directly to the opening quote.</p>
+<p><strong>4.</strong> <strong>Unclosed Multi-line Comments (<code>LEX_UNCLOSED_COMMENT</code>):</strong> Block comments (<code>/* ... */</code>) that reach end-of-file without a closing <code>*/</code>. The error coordinate points directly to the opening <code>/*</code>.</p>
+<hr>
+<h2>3. Challenges Faced and Solutions</h2>
+<h3>3.1 Maximal Munch for Multi-Character Operators</h3>
+<ul>
+<li><strong>Challenge:</strong> Ambiguity between single-character and two-character operators (<code>=</code> vs <code>==</code>, <code>&lt;</code> vs <code>&lt;=</code>, <code>&gt;</code> vs <code>&gt;=</code>, <code>&amp;</code> vs <code>&amp;&amp;</code>, <code>|</code> vs <code>||</code>).</li>
+<li><strong>Solution:</strong> Maximal munch inspects the next character. If a two-character operator matches, both characters are consumed as <code>LOGOP</code>. Lone <code>&amp;</code> and <code>|</code> are rejected as invalid characters since Mini Java does not support bitwise operators.</li>
+</ul>
+<h3>3.2 Distinguishing Floating-Point Dots from Delimiter Dots</h3>
+<ul>
+<li><strong>Challenge:</strong> The <code>.</code> character is both a member access delimiter (<code>System.out.println</code>) and a decimal separator in floats (<code>85.5</code>).</li>
+<li><strong>Solution:</strong> A dot is treated as part of a <code>NUMBER</code> literal only when immediately preceded by digits and immediately followed by at least one digit. In all other cases, it is emitted as a <code>DOT</code> delimiter.</li>
+</ul>
+<h3>3.3 Digit-Prefixed Invalid Identifiers</h3>
+<ul>
+<li><strong>Challenge:</strong> Sequences like <code>1name</code> could prematurely split into a number (<code>1</code>) followed by an identifier (<code>name</code>), producing misleading syntax errors.</li>
+<li><strong>Solution:</strong> After consuming digits, the scanner peeks ahead. If the subsequent character is an ASCII letter or underscore, the entire token is consumed as an invalid lexeme and a single <code>LEX_INVALID_IDENTIFIER</code> diagnostic is emitted.</li>
+</ul>
+<h3>3.4 Accurate Unclosed Multi-line Comment Tracking</h3>
+<ul>
+<li><strong>Challenge:</strong> When an unclosed block comment spans multiple lines, reporting the defect at EOF hides where the comment originally started.</li>
+<li><strong>Solution:</strong> The scanner records the starting line and column upon encountering <code>/*</code>. If EOF is reached before <code>*/</code>, the diagnostic reports the exact opening position.</li>
+</ul>
+</body></html>

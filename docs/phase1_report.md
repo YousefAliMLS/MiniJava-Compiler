@@ -1,66 +1,73 @@
 # Mini Java Compiler - Phase 1 Technical Report: Lexical Analyzer
 
 **Course:** CSCI415 - Compiler Design (Fall 2026)  
-**Deliverable:** Phase 1 Submission Report  
+**Deliverable:** Phase 1 Official Submission Report (Lexical Analysis)  
 **Target Language:** Mini Java  
-**Implementation:** Python (Standard Library Only)  
+**Implementation:** Python (Standard Library Only, No External Packages)  
+
+### Team Members and Roles
+- **Member 1:** Hamza Taher (ID: [ID]) - Foundations, Driver, and CLI Integration
+- **Member 2:** Mostafa Abd Elhamied Ismael (ID: [ID]) - Central Lexer Engine and Position Tracking
+- **Member 3:** Yousef Ali (ID: [ID]) - Team Leader, Symbol Table, Test Samples, and Report
+- **Member 4:** Yosef Yakop (ID: [ID]) - Identifier and Number Scanner, PDF Acceptance Suite
+- **Member 5:** Youssef Nasr (ID: [ID]) - String and Operator Scanner, Golden Test Suite
 
 ---
 
 ## 1. Tokens Implemented
 
-Our lexical analyzer scans the Mini Java source character-by-character without relying on external or regular expression libraries. The token system supports the following categories:
+The lexical analyzer scans source code character-by-character without regular expressions or third-party libraries. All token classifications match the course specifications:
 
 ### 1.1 Keywords (15 Total)
-The scanner recognizes all 15 required keywords and maps them to their respective token types:
-- Control Flow: `if` (`IF`), `else` (`ELSE`), `while` (`WHILE`), `return` (`RETURN`)
-- Type Declarations: `boolean` (`BOOLEAN_TYPE`), `int` (`INT_TYPE`), `float` (`FLOAT_TYPE`), `String` (`STRING_TYPE`), `void` (`VOID`)
-- Object-Oriented: `class` (`CLASS`), `public` (`PUBLIC`), `static` (`STATIC`), `extends` (`EXTENDS`), `this` (`THIS`), `new` (`NEW`)
-- Entry Point: `main` (`MAIN`)
+- Control Flow: `if` (`IF`), `else` (`ELSE`), `while` (`WHILE`), `for` (`FOR`), `return` (`RETURN`)
+- Primitive Types: `boolean` (`BOOLEAN_TYPE`), `int` (`INT_TYPE`), `float` (`FLOAT_TYPE`), `char` (`CHAR`), `String` (`STRING_TYPE`), `void` (`VOID`)
+- Object-Oriented: `class` (`CLASS`), `public` (`PUBLIC`), `static` (`STATIC`), `main` (`MAIN`)
+- Keyword matching is strictly case-sensitive (`class` is a keyword; `Class` is scanned as an identifier).
 
 ### 1.2 Literals
-- **Numeric Literals (`NUMBER`):** Integer sequences (`42`, `0`) and floating-point literals with mandatory digits on both sides of the decimal (`3.14`, `0.5`).
+- **Numeric Literals (`NUMBER`):** Integers (`10`, `0`) and decimals (`85.5`, `3.14`). Floating-point numbers require digits on both sides of the decimal point.
 - **Boolean Literals (`BOOLEAN`):** `true` and `false`.
-- **String Literals (`STRING`):** Enclosed in double or single quotes with quotes preserved (`"hello"`).
+- **String Literals (`STRING`):** Text enclosed in single (`'A'`) or double (`"Ali"`) quotes. Quotes are preserved in the token lexeme.
 
 ### 1.3 Identifiers (`IDENTIFIER`)
-Identifer names start with an ASCII letter or underscore (`[a-zA-Z_]`) followed by letters, digits, or underscores (`[a-zA-Z0-9_]*`). Every encountered identifier is registered into an `IdentifierTable` tracking 1-based first appearance coordinates and all occurrences.
+- User-defined names beginning with an ASCII letter or underscore (`[a-zA-Z_]`) followed by letters, digits, or underscores (`[a-zA-Z0-9_]*`).
+- Every valid identifier occurrence is recorded in a shared `IdentifierTable` tracking 1-based coordinates and total frequency.
 
 ### 1.4 Operators and Delimiters
 - **Mathematical Operators (`MATHOP`):** `+`, `-`, `*`, `/`, `%`
 - **Logical and Relational Operators (`LOGOP`):** `==`, `!=`, `<`, `<=`, `>`, `>=`, `&&`, `||`, `!`
 - **Assignment Operator (`ASSIGN`):** `=`
 - **Delimiters:** `(`, `)`, `{`, `}`, `[`, `]`, `;`, `,`, `.`
-- **End of File:** An explicit `EOF` token emitted at the end of every stream for Phase 2 parser compatibility.
+- **Stream Termination:** An explicit `EOF` token is emitted at the end of every stream.
 
 ---
 
 ## 2. How Errors Were Handled
 
-The lexical analyzer follows a non-halting error recovery strategy: when a lexical defect is detected, a descriptive diagnostic is recorded with exact 1-based coordinates (`line`, `column`), and the scanner advances to process subsequent characters. This ensures all errors in a file are captured in a single run.
+The scanner follows a non-halting error recovery strategy: when an error is detected, an error diagnostic is recorded with exact 1-based coordinates (`line`, `column`), and scanning continues to capture all remaining defects in a single pass.
 
-Four distinct lexical errors are detected:
-1. **Invalid Characters (`LEX_INVALID_CHARACTER`):** Characters not belonging to the Mini Java alphabet (such as `@`, `#`, `$`) are reported with their line and column. The scanner skips the invalid character and continues.
-2. **Invalid Identifiers (`LEX_INVALID_IDENTIFIER`):** Identifiers incorrectly prefixed by digits (e.g., `1variable`, `99count`). The scanner consumes the entire malformed lexeme to prevent cascaded errors and reports the defect without emitting an identifier token.
-3. **Unclosed String Literals (`LEX_UNCLOSED_STRING`):** Strings reaching a newline or EOF before the matching closing quote are flagged with the starting coordinate of the opening quote.
-4. **Unclosed Multi-line Comments (`LEX_UNCLOSED_COMMENT`):** Block comments (`/* ... */`) that reach EOF without a closing `*/` report an error at the exact line and column where the comment began.
+Four required error categories are detected:
+1. **Invalid Characters (`LEX_INVALID_CHARACTER`):** Characters not in the Mini Java alphabet (such as `@`, `#`, `$`) or lone bitwise operators (`&`, `|`) are reported with their coordinates. The invalid character is skipped and scanning resumes.
+2. **Invalid Identifiers (`LEX_INVALID_IDENTIFIER`):** Identifiers prefixed with digits (e.g., `1name`, `2_count`, `12.34abc`). The entire alphanumeric sequence is consumed as a single unit to prevent cascaded parsing errors, and reported without emitting an identifier token.
+3. **Unclosed String Literals (`LEX_UNCLOSED_STRING`):** Quoted literals that reach an unescaped newline or end-of-file without a closing quote. The error coordinate points directly to the opening quote.
+4. **Unclosed Multi-line Comments (`LEX_UNCLOSED_COMMENT`):** Block comments (`/* ... */`) that reach end-of-file without a closing `*/`. The error coordinate points directly to the opening `/*`.
 
 ---
 
 ## 3. Challenges Faced and Solutions
 
 ### 3.1 Maximal Munch for Multi-Character Operators
-- **Challenge:** Differentiating between `=` and `==`, `&` and `&&`, `|` and `||`, `<` and `<=`, `>` and `>=`.
-- **Solution:** Implemented maximal munch: the scanner peeks at the subsequent character to check if a valid two-character operator exists. If so, both characters are consumed; otherwise, only the single-character operator is emitted. Lone `&` and `|` are reported as invalid characters since Mini Java does not support bitwise operators.
+- **Challenge:** Ambiguity between single-character and two-character operators (`=` vs `==`, `<` vs `<=`, `>` vs `>=`, `&` vs `&&`, `|` vs `||`).
+- **Solution:** Maximal munch inspects the next character. If a two-character operator matches, both characters are consumed as `LOGOP`. Lone `&` and `|` are rejected as invalid characters since Mini Java does not support bitwise operators.
 
 ### 3.2 Distinguishing Floating-Point Dots from Delimiter Dots
-- **Challenge:** The `.` character serves as both a method invocation delimiter (`System.out.println`) and a decimal point in float literals (`3.14`).
-- **Solution:** A dot is treated as part of a numeric literal only when immediately preceded by digits and immediately followed by at least one digit (`c in "0123456789"`). In all other contexts, it is emitted as a `DOT` delimiter.
+- **Challenge:** The `.` character is both a member access delimiter (`System.out.println`) and a decimal separator in floats (`85.5`).
+- **Solution:** A dot is treated as part of a `NUMBER` literal only when immediately preceded by digits and immediately followed by at least one digit. In all other cases, it is emitted as a `DOT` delimiter.
 
 ### 3.3 Digit-Prefixed Invalid Identifiers
-- **Challenge:** When encountering `1name`, scanning `1` as a number and `name` as an identifier produces incorrect syntax tokens.
-- **Solution:** The scanner looks ahead after consuming digits. If the character immediately following the number is an ASCII letter or underscore, the scanner consumes the entire token as a unit and emits a single `LEX_INVALID_IDENTIFIER` error.
+- **Challenge:** Sequences like `1name` could prematurely split into a number (`1`) followed by an identifier (`name`), producing misleading syntax errors.
+- **Solution:** After consuming digits, the scanner peeks ahead. If the subsequent character is an ASCII letter or underscore, the entire token is consumed as an invalid lexeme and a single `LEX_INVALID_IDENTIFIER` diagnostic is emitted.
 
-### 3.4 Unclosed Comment Coordinate Tracking
-- **Challenge:** When a multi-line comment spans dozens of lines and fails to terminate, reporting the error at EOF is unhelpful.
-- **Solution:** The scanner stores the exact starting `line` and `column` when encountering `/*`. If EOF is reached before closing, the error points directly back to the opening `/*`.
+### 3.4 Accurate Unclosed Multi-line Comment Tracking
+- **Challenge:** When an unclosed block comment spans multiple lines, reporting the defect at EOF hides where the comment originally started.
+- **Solution:** The scanner records the starting line and column upon encountering `/*`. If EOF is reached before `*/`, the diagnostic reports the exact opening position.
