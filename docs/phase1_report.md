@@ -5,12 +5,12 @@
 **Target Language:** Mini Java  
 **Implementation:** Python (Standard Library Only, No External Packages)  
 
-### Team Members and Roles
-- **Member 1:** Hamza Taher (ID: [ID]) - Foundations, Driver, and CLI Integration
-- **Member 2:** Mostafa Abd Elhamied Ismael (ID: [ID]) - Central Lexer Engine and Position Tracking
-- **Member 3:** Yousef Ali (ID: [ID]) - Team Leader, Symbol Table, Test Samples, and Report
-- **Member 4:** Yosef Yakop (ID: [ID]) - Identifier and Number Scanner, PDF Acceptance Suite
-- **Member 5:** Youssef Nasr (ID: [ID]) - String and Operator Scanner, Golden Test Suite
+### Team 9 - Members and Roles
+- **Member 1:** Hamza Taher Essam (ID: 231001880) - Foundations, Driver, and CLI Integration
+- **Member 2:** Mostafa Abd Elhamied Ismael (ID: 231000842) - Central Lexer Engine and Position Tracking
+- **Member 3:** Yousef Mahmoud Ali (ID: 231001086) - Team Leader, Symbol Table, Test Samples, and Report
+- **Member 4:** Yosef Mohamed Yacoup (ID: 231000016) - Identifier and Number Scanner, PDF Acceptance Suite
+- **Member 5:** Youssef Hassan Nasr (ID: 231000751) - String and Operator Scanner, Golden Test Suite
 
 ---
 

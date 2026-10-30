@@ -57,17 +57,17 @@ The Phase 1 scanner converts raw source code character-by-character into a strea
 
 ---
 
-## Team Roles and Task Allocation
+## Team Roles and Task Allocation (Team 9)
 
 Work is divided across five distinct roles to ensure balanced implementation:
 
 | Member | Primary Responsibility | Owned Files | Deliverables |
 |---|---|---|---|
-| **Member 1** | **Architect & CLI Integration Lead** | `minijava/tokens.py`<br>`minijava/diagnostics.py`<br>`minijava/driver.py`<br>`tests/helpers.py`<br>`tests/test_contract.py` | Token definitions, diagnostic factory, CLI driver, report formatter, and reflection tests. |
-| **Member 2** | **Lexer Engine Core** | `minijava/lexer.py`<br>`tests/test_lexer_core.py` | Central `Lexer` loop, cursor navigation, whitespace, comments, delimiters, and EOF token. |
-| **Member 3** | **Symbol Table & Submission Lead** | `minijava/symbol_table.py`<br>`tests/test_symbol_table.py`<br>`samples/phase1_tests.txt`<br>`docs/phase1_report.md` | `IdentifierTable`, formatting, test programs deliverable, and official 1-2 page technical report. |
-| **Member 4** | **Scanner Specialist: Identifiers & Numbers** | `minijava/scanner_ident_num.py`<br>`tests/test_scanner_ident_num.py`<br>`tests/test_pdf_examples.py` | Identifiers, keywords, float/int literals, digit-prefixed invalid identifier detection (`1name`), PDF regression suite. |
-| **Member 5** | **Scanner Specialist: Strings & Operators** | `minijava/scanner_str_op.py`<br>`tests/test_scanner_str_op.py`<br>`tests/golden/lex/*` | String literals, escape sequences, operator maximal munch, and independent golden test cases. |
+| **Member 1**<br>Hamza Taher Essam<br>`231001880` | **Architect & CLI Integration Lead** | `minijava/tokens.py`<br>`minijava/diagnostics.py`<br>`minijava/driver.py`<br>`tests/helpers.py`<br>`tests/test_contract.py` | Token definitions, diagnostic factory, CLI driver, report formatter, and reflection tests. |
+| **Member 2**<br>Mostafa Abd Elhamied Ismael<br>`231000842` | **Lexer Engine Core** | `minijava/lexer.py`<br>`tests/test_lexer_core.py` | Central `Lexer` loop, cursor navigation, whitespace, comments, delimiters, and EOF token. |
+| **Member 3**<br>Yousef Mahmoud Ali (Lead)<br>`231001086` | **Symbol Table & Submission Lead** | `minijava/symbol_table.py`<br>`tests/test_symbol_table.py`<br>`samples/phase1_tests.txt`<br>`docs/phase1_report.md` | `IdentifierTable`, formatting, test programs deliverable, and official 1-2 page technical report. |
+| **Member 4**<br>Yosef Mohamed Yacoup<br>`231000016` | **Scanner Specialist: Identifiers & Numbers** | `minijava/scanner_ident_num.py`<br>`tests/test_scanner_ident_num.py`<br>`tests/test_pdf_examples.py` | Identifiers, keywords, float/int literals, digit-prefixed invalid identifier detection (`1name`), PDF regression suite. |
+| **Member 5**<br>Youssef Hassan Nasr<br>`231000751` | **Scanner Specialist: Strings & Operators** | `minijava/scanner_str_op.py`<br>`tests/test_scanner_str_op.py`<br>`tests/golden/lex/*` | String literals, escape sequences, operator maximal munch, and independent golden test cases. |
 
 ---
 

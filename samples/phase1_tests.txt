@@ -2,6 +2,13 @@
 ================================================================================
 Mini Java Compiler - Phase 1 Test Suite
 Course: CSCI415 - Compiler Design (Fall 2026)
+Team: Team 9
+Team Members:
+  - Yousef Mahmoud Ali (ID: 231001086) - Team Leader
+  - Hamza Taher Essam (ID: 231001880)
+  - Mostafa Abd Elhamied Ismael (ID: 231000842)
+  - Yosef Mohamed Yacoup (ID: 231000016)
+  - Youssef Hassan Nasr (ID: 231000751)
 Deliverable: Official Phase 1 Test Programs
 ================================================================================
 */
